@@ -20,7 +20,10 @@ const Header: React.FC = () => {
         if (isMounted.current) {
             localStorage.setItem("Pizza-Cart", JSON.stringify(items));
         } else {
-            dispatch(setCart(JSON.parse(localStorage.getItem("Pizza-Cart") || "")));
+            const data = localStorage.getItem("Pizza-Cart");
+            if (data) {
+                dispatch(setCart(JSON.parse(data)));
+            }
         }
         isMounted.current = true;
     }, [items]);
